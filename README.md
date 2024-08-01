@@ -1,2 +1,2 @@
 # Tetris
- WSL + Vscode + Cmake + GCC 
+Vscode + Cmake + GCC 
