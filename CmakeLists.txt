@@ -7,6 +7,8 @@ project(Tetris)
 # Add source files
 set(SOURCES 
     main.cpp
+    terminal.cpp
+    terminal.h
 )
 
 # Add executable target
