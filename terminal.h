@@ -1,3 +1,5 @@
+#pragma once
+
 namespace tc { // terminal control
     // Set the cursor position to row r and column c.
     void setCursor(int r, int c);

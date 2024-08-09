@@ -9,6 +9,8 @@ set(SOURCES
     main.cpp
     terminal.cpp
     terminal.h
+    utils.cpp 
+    utils.h
 )
 
 # Add executable target
