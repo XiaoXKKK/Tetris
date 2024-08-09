@@ -11,6 +11,8 @@ set(SOURCES
     terminal.h
     utils.cpp 
     utils.h
+    draw.cpp
+    draw.h
 )
 
 # Add executable target

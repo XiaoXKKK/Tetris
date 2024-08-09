@@ -1,5 +1,6 @@
 #include "terminal.h"
 #include "utils.h"
+#include "draw.h"
 
 #include <iostream>
 #include <chrono>
@@ -11,6 +12,12 @@ void init()
 {
     tc::clearScreen();
     tc::hideCursor();
+    tc::setCursor(1,1);
+    dw::window(1,1,9,6,"Hold");
+    dw::window(1,10,12,22,"Tetriz");
+    dw::window(7,1,9,16,"Status");
+    dw::window(19,22,8,4,"Info");
+    dw::window(1,22,8,18,"Next");
 }
 
 void loop()
@@ -18,12 +25,10 @@ void loop()
     int i = 1;
     while(true)
     {
-        tc::clearScreen();
-
-        tc::setCursor(1,1);
+        tc::setCursor(10,4);
         cout << "FPS:" << ut::fps();
 
-        tc::setCursor(i++%10, 10);
+        tc::setCursor(5, 10);
         tc::setBackColor(15);
         tc::setForeColor(214);
         cout << "    " << flush;
