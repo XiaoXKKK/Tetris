@@ -21,4 +21,11 @@ namespace tc { // terminal control
 
     // Set the cursor to be visible.
     void showCursor();
+
+    // Check if a key has been pressed.
+    bool kbhit();
+
+    // Get the character of the key that has been pressed.
+    char getch();
+    
 }

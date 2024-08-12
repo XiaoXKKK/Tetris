@@ -1,5 +1,5 @@
 #include "terminal.h"
-#include <iostream>
+#include "define.h"
 
 #define CSI "\033["
 
@@ -38,3 +38,12 @@ void tc::showCursor()
     std::cout << CSI << "?25h";
 }
 
+bool tc::kbhit()
+{
+    return std::cin.rdbuf()->in_avail();
+}
+
+char tc::getch()
+{
+    return std::cin.get();
+}

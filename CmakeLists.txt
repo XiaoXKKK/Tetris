@@ -13,6 +13,12 @@ set(SOURCES
     utils.h
     draw.cpp
     draw.h
+    define.h
+    control.cpp
+    control.h
+    game.cpp
+    game.h
+    
 )
 
 # Add executable target

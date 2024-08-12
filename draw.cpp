@@ -1,8 +1,7 @@
 #include "draw.h"
 #include "terminal.h"
 #include "utils.h"
-
-#include <iostream>
+#include "define.h"
 
 /*
 	    0	1	2	3	4	5	6	7	8	9	A	B	C	D	E	F
@@ -24,16 +23,12 @@ namespace dw{                    //0123456
     const std::u32string style = rounded_corner;
 
 
-    inline int block2col(int block){
-        return block * 2 - 1;
-    }
-
     void window(int top, int left, int weight, int height, std::string title)
     {
         // two characters for each block
 
         // first line
-        tc::setCursor(top, block2col(left));
+        tc::setCursor(top, ut::b2c(left));
         std::cout << ut::utf32_to_utf8({style[0],style[3]});
         for (int i = 1; i < weight - 1; i++)
         {
@@ -41,7 +36,7 @@ namespace dw{                    //0123456
         }
         std::cout << ut::utf32_to_utf8({style[4]});
         // last line
-        tc::setCursor(top + height - 1, block2col(left));
+        tc::setCursor(top + height - 1, ut::b2c(left));
         std::cout << ut::utf32_to_utf8({style[0], style[5]});
         for (int i = 1; i < weight - 1; i++)
         {
@@ -51,13 +46,13 @@ namespace dw{                    //0123456
         // middle lines
         for (int i = top + 1; i < top + height - 1; i++)
         {
-            tc::setCursor(i, block2col(left));
+            tc::setCursor(i, ut::b2c(left));
             std::cout << ut::utf32_to_utf8({style[0], style[2]});
-            tc::setCursor(i, block2col(left) + (weight - 1) * 2);
+            tc::setCursor(i, ut::b2c(left) + (weight - 1) * 2);
             std::cout << ut::utf32_to_utf8({style[2]});
         }
         // title
-        tc::setCursor(top, block2col(left) + (weight * 2 - title.size()) / 2);
+        tc::setCursor(top, ut::b2c(left) + (weight * 2 - title.size()) / 2);
         std::cout << title;
     }
 }

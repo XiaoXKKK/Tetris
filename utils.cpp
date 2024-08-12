@@ -1,10 +1,5 @@
 #include "utils.h"
-
-#include <chrono>
-#include <locale>
-#include <iostream>
-#include <codecvt>
-using namespace std::chrono_literals;
+#include "define.h"
 
 int ut::fps()
 {
@@ -26,6 +21,6 @@ int ut::fps()
 
 std::string ut::utf32_to_utf8(const std::u32string &utf32)
 {
-    std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> convert;
+    static std::wstring_convert<std::codecvt_utf8<char32_t>, char32_t> convert;
     return convert.to_bytes(utf32);
 }
