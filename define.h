@@ -4,6 +4,7 @@
 #include <codecvt>
 #include <thread>
 #include <map>
+#include <vector>
 #include <functional>
 using namespace std::chrono_literals;
 

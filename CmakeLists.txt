@@ -18,7 +18,9 @@ set(SOURCES
     control.h
     game.cpp
     game.h
-    
+    tetromino.cpp
+    tetromino.h
+    color.h
 )
 
 # Add executable target

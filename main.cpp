@@ -30,10 +30,12 @@ void loop()
         tc::setCursor(10,4);
         cout << "FPS:" << ut::fps();
 
-        tc::setCursor(gm::row, ut::b2c(gm::col));
-        tc::setBackColor(15);
-        tc::setForeColor(214);
-        cout << "  " << flush;
+        // tc::setCursor(gm::row, ut::b2c(gm::col));
+        // tc::setBackColor(15);
+        // tc::setForeColor(214);
+        // cout << "  " << flush;
+        dw::tetromino(gm::cur, gm::row, gm::col);
+
         tc::resetColor();
         this_thread::sleep_for(chrono::milliseconds(100));
     }

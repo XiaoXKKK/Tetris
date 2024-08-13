@@ -19,3 +19,6 @@ tc: terminal control
 [Box Drawing Characters](https://en.wikipedia.org/wiki/Box-drawing_characters)
 
 ## 5 - Game Control & Keyboard Input
+
+## 6 - Tetrimino & SRS
+[TetrisWiki](https://harddrop.com/wiki/Tetromino)
