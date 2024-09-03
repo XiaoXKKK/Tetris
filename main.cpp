@@ -10,6 +10,9 @@ using namespace std;
 
 void init()
 {
+#ifdef _WIN32
+    system("chcp 65001");
+#endif
     tc::hideCursor();
     gm::init();
     gm::startListener();    
@@ -34,7 +37,7 @@ void loop()
         // tc::setBackColor(15);
         // tc::setForeColor(214);
         // cout << "  " << flush;
-        dw::tetromino(gm::cur, gm::row, gm::col);
+        dw::tetromino(gm::cur_s, gm::row, gm::col, gm::index);
 
         tc::resetColor();
         this_thread::sleep_for(chrono::milliseconds(100));

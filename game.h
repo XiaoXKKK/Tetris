@@ -5,7 +5,9 @@
 namespace gm{
     extern bool running;
     extern int row, col;
-    extern Tetromino cur;
+    extern Tetromino_0 cur;
+    extern Tetromino cur_s;
+    extern int index;
 
     void init();
 

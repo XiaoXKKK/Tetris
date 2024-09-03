@@ -55,7 +55,7 @@ namespace dw{                    //0123456
         tc::setCursor(top, ut::b2c(left) + (weight * 2 - title.size()) / 2);
         std::cout << title;
     }
-    void tetromino(Tetromino &t, int top, int left)
+    void tetromino(Tetromino_0 &t, int top, int left)
     {
         tc::setCursor(top, ut::b2c(left));
         for(int i = 0;i < t.size();i++){
@@ -72,6 +72,17 @@ namespace dw{                    //0123456
                 }
             }
             std::cout << std::endl;
+        }
+    }
+    void tetromino(Tetromino& t, int top, int left, int index)
+    {
+        tc::setCursor(top, ut::b2c(left));
+        tc::setBackColor(t[index][0].second);
+        std::cout << "  ";
+        for (auto& i : t[index]) {
+            if (i.first >= 'A') continue;
+            tc::setCursor(top - i.second, ut::b2c(left + i.first));
+            std::cout << "  ";
         }
     }
 }

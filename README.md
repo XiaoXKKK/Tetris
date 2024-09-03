@@ -22,3 +22,7 @@ tc: terminal control
 
 ## 6 - Tetrimino & SRS
 [TetrisWiki](https://harddrop.com/wiki/Tetromino)
+
+## 6.1 - Offset Representation
+[SRS](https://harddrop.com/wiki/SRS)
+Allowing WallKick Table that follows it.

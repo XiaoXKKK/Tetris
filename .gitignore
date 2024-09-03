@@ -1,8 +1,11 @@
 # VsCode
 .vscode/
+CmakePresets.json
 
 # Cmake
 build/
+CMakeFiles/
+CMakeCache.txt
 
 # Prerequisites
 *.d

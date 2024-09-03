@@ -5,6 +5,7 @@
 #include <thread>
 #include <map>
 #include <vector>
+#include <array>
 #include <functional>
 using namespace std::chrono_literals;
 
