@@ -12,12 +12,14 @@ namespace gm
         {KEY_W, commrotate},
         {KEY_S, commdown},
         {KEY_A, commleft},
-        {KEY_D, commright}
+        {KEY_D, commright},
+        {KEY_SPACE,commdrop}
     };
 
     void keyEvent(){
         while (running)
         {
+            if (locking) continue;
             command = _getch();
             if (commandMap.find(command) != commandMap.end())
             {
@@ -46,5 +48,9 @@ namespace gm
     }
     void commright(){
         right();
+    }
+    void commdrop()
+    {
+        drop();
     }
 }

@@ -96,22 +96,22 @@ namespace dw{                    //0123456
         {
             for (int y = 0; y < 20; y++)
             {
-                if (m[x][y] == buffer[x][y]) continue;
-                buffer[x][y] = m[x][y];
+                if (m[y][x] == buffer[y][x]) continue;
+                buffer[y][x] = m[y][x];
 
                 row = 20 - y - 1 + top;
                 col = x + left;
                 tc::setCursor(row, ut::b2c(col), oss);
-                if (m[x][y] > 0)
+                if (m[y][x] > 0)
                 {
                     tc::resetColor(oss);
-                    tc::setBackColor(m[x][y], oss);
+                    tc::setBackColor(m[y][x], oss);
                     oss << "  ";
                 }
-                else if (m[x][y] < 0)
+                else if (m[y][x] < 0)
                 {
                     tc::resetColor(oss);
-                    tc::setForeColor(-m[x][y], oss);
+                    tc::setForeColor(-m[y][x], oss);
                     oss << "\u25E3\u25E5";
                 }
                 else

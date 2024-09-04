@@ -13,5 +13,6 @@ namespace gm{
     void commdown();
     void commleft();
     void commright();
-    
+    void commdrop();
+
 }

@@ -35,3 +35,6 @@ Draw background once
 Add frame buffer & sstream buffer
 
 40 fps -> 6600 fps
+
+## 9 - Drop & Lock & Clear
+Rotation Bug fixed

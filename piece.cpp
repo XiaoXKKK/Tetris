@@ -1,11 +1,14 @@
 #include "piece.h"
 
 namespace gm {
-    std::pair<int, int> Piece::get_mino(int i)
+    std::pair<int, int> Piece::get_mino(int i, int next_idx)
     {
         assert(i >= 0 && i < 4);
         if (i == 0) return std::pair<int, int>(0, 0);
-        return tetro_set[index][i];
+        if (next_idx == -1)
+            return tetro_set[index][i];
+        else 
+            return tetro_set[next_idx][i];
     }
 
     std::pair<int, int> Piece::get_pos()
@@ -22,46 +25,58 @@ namespace gm {
     {
     }
 
-    void Piece::move(int dx, int dy)
+    void Piece::set_playfield(std::shared_ptr<Matrix> sp)
+    {
+        sp_playfield = sp;
+    }
+
+    bool Piece::move(int dx, int dy)
     {
         if (test(x + dx, y + dy, index)) {
             x += dx;
             y += dy;
+            return true;
         }
+        return false;
     }
 
-    void Piece::down()
+    bool Piece::down()
     {
-        move(0, -1);
+        return move(0, -1);
     }
 
-    void Piece::left()
+    bool Piece::left()
     {
-        move(-1, 0);
+        return move(-1, 0);
     }
 
-    void Piece::right()
+    bool Piece::right()
     {
-        move(1, 0);
+        return move(1, 0);
     }
 
-    void Piece::rotate()
+    bool Piece::rotate()
     {
         // TODO: check if the rotation is valid
-        index = (index + 1) % 4;
+        int next_idx = (index + 1) % 4;
+        if (test(x, y, next_idx)) {
+            index = next_idx;
+            return true;
+        }
+        return false;
     }
 
     bool Piece::test(int x, int y, int index)
     {
-        for (int i = 1;i < 4;i++) {
-            auto [dx, dy] = get_mino(i);
+        for (int i = 0;i < 4;i++) {// Bug Fixed 
+            auto [dx, dy] = get_mino(i, index);
             // check if the piece is out of bounds
-            if (x + dx < 0 || x + dx >= (*sp_playfield).size() \
-                || y + dy < 0 || y + dy >= (*sp_playfield)[0].size()) {
+            if (x + dx < 0 || x + dx >= (*sp_playfield)[0].size() \
+                || y + dy < 0 || y + dy >= (*sp_playfield).size()) {
                 return false;
             }
             // check if the piece is colliding with other pieces
-            if ((*sp_playfield)[x + dx][y + dy] > 0) {
+            if ((*sp_playfield)[y + dy][x + dx] > 0) {
                 return false;
             }
         }

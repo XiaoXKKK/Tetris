@@ -26,6 +26,8 @@ set(SOURCES
     color.h
     piece.cpp
     piece.h
+    log.cpp
+    log.h
 )
 
 # Add executable target
