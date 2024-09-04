@@ -101,7 +101,18 @@ namespace dw{                    //0123456
             gm::merge(tmp, p);
             q.pop();
         }
-        matrix(tmp, top, left, &buffer, "  ");
+        matrix(tmp, top, left, &buffer);
+    }
+    void hold(Tetromino& t, int top, int left)
+    {
+        static Matrix buffer(4, std::vector<int>(7, -1));
+        Matrix tmp(4, std::vector<int>(7, 0));
+        if (!t.empty()) {
+            gm::Piece p(t, 3, 1, 0);
+            p.set_hold();
+            gm::merge(tmp, p);
+        }
+        matrix(tmp, top, left, &buffer);
     }
     void matrix(const Matrix& m, int top, int left, Matrix* buffer, std::string blank)
     {

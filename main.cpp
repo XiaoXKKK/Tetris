@@ -43,6 +43,7 @@ void loop()
         // cout << "  " << flush;
         dw::frame(gm::frame, 2, 11);
         dw::next(gm::next_pieces, 2, 23);
+        dw::hold(gm::hold_piece, 2, 2);
 
 
         tc::resetColor();

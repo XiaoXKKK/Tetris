@@ -43,3 +43,6 @@ Rotation Bug fixed
 [Randomizer History](https://simon.lc/the-history-of-tetris-randomizers)
 
 ## 11 - SRS & Wallkick
+
+## 12 - Hold piece
+[Hold piece](https://harddrop.com/wiki/Hold_piece)

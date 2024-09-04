@@ -3,16 +3,18 @@
 
 
 namespace gm {
-    bool running, locking;
+    bool running, locking, holding;
     Piece one_piece;
     Matrix playfield;
     Matrix frame;
     std::chrono::milliseconds duration;
     std::queue<Tetromino> next_pieces;
+    Tetromino hold_piece;
 
     void init() {
         running = true;
         locking = false;
+        holding = false;
         // playfield[y][x]
         playfield = Matrix(22, std::vector<int>(10, 0));
         duration = 1000ms;
@@ -20,6 +22,7 @@ namespace gm {
         srand(time(0));
         preview();
         one_piece = pick();
+        hold_piece.clear();
     }
     Piece pick() {
         // Truly Pseudo Random
@@ -98,6 +101,7 @@ namespace gm {
                 clear();
                 one_piece = pick();
                 locking = false;
+                holding = false;
             }
             else {
                 locking = true;
@@ -123,5 +127,21 @@ namespace gm {
     void drop() {
         while (one_piece.down());
         locking = true;
+    }
+    void hold() {
+        if (holding) {
+            return;
+        }
+        if (hold_piece.empty()) {
+            hold_piece = one_piece.get_tetromino();
+            one_piece = pick();
+        }
+        else {
+            auto temp = one_piece.get_tetromino();
+            one_piece = Piece(hold_piece, 4, 20, 0);
+            hold_piece = temp;
+            one_piece.set_playfield(std::make_shared<Matrix>(playfield));
+        }
+        holding = true;
     }
 }

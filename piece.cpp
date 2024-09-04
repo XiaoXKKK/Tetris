@@ -18,12 +18,23 @@ namespace gm {
 
     int Piece::get_color()
     {
-        return status?tetro_set[index][0].second:-tetro_set[index][0].second;
+        if (status == 2) return (int)Color::White;
+        return status ? tetro_set[index][0].second : -tetro_set[index][0].second;
     }
 
     void Piece::set_ghost()
     {
         status = 0;
+    }
+
+    void Piece::set_hold()
+    {
+        status = 2;
+    }
+
+    Tetromino Piece::get_tetromino()
+    {
+        return tetro_set;
     }
 
     Piece::Piece(Tetromino& t, int x, int y, int index) : tetro_set(t), x(x), y(y), index(index), status(1)

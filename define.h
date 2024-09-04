@@ -30,13 +30,14 @@ using namespace std::chrono_literals;
 #define KEY_ROTATECW 'l'
 #define KEY_ROTATECCW 'j'
 #define KEY_ROTATE180 'k'
+#define KEY_HOLD 'h'
 #define KEY_SOFTDOWN 's'
 #define KEY_LEFT 'a'
 #define KEY_RIGHT 'd'
 #define KEY_HARDDOWN ' '
 
 using Matrix = std::vector<std::vector<int>>;
-using Tetromino = std::array<std::array<std::pair<int, int>, 4>, 4>;
+using Tetromino = std::vector<std::vector<std::pair<int, int>>>;
 using Offset = std::vector<std::vector<std::pair<int,int>>>;
 using std::ranges::views::iota;
 

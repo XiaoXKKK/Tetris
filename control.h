@@ -16,5 +16,6 @@ namespace gm{
     void commleft();
     void commright();
     void commdrop();
+    void commhold();
 
 }

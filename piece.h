@@ -6,7 +6,7 @@ namespace gm {
     class Piece
     {
     private:
-        int status; // 1: common 0: ghost
+        int status; // 1: common 0: ghost 2: hold
         Tetromino tetro_set;
         Offset offset;
         int x, y;
@@ -19,6 +19,8 @@ namespace gm {
         bool test(int x, int y, int next_idx = -1);
         Piece() = default;
         void set_ghost();
+        void set_hold();
+        Tetromino get_tetromino();
         Piece(Tetromino& t, int x, int y, int index = 0);
         void set_playfield(std::shared_ptr<Matrix> sp);
 

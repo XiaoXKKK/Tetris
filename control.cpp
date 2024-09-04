@@ -15,7 +15,8 @@ namespace gm
         {KEY_SOFTDOWN, commdown},
         {KEY_LEFT, commleft},
         {KEY_RIGHT, commright},
-        {KEY_HARDDOWN, commdrop}
+        {KEY_HARDDOWN, commdrop},
+        {KEY_HOLD, commhold}
     };
 
     void keyEvent(){
@@ -60,5 +61,9 @@ namespace gm
     void commdrop()
     {
         drop();
+    }
+    void commhold()
+    {
+        hold();
     }
 }
