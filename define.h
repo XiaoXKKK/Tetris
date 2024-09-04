@@ -11,6 +11,7 @@
 #include <string>
 #include <cassert>
 #include <ranges>
+#include <sstream>
 
 using namespace std::chrono_literals;
 

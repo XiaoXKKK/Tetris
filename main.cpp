@@ -14,6 +14,14 @@ void init()
     system("chcp 65001");
 #endif
     tc::hideCursor();
+    tc::clearScreen();
+    tc::setCursor(1, 1);
+    dw::window(1,1,9,6,"Hold");
+    dw::window(1,10,12,22,"Tetriz");
+    dw::window(7,1,9,16,"Status");
+    dw::window(19,22,8,4,"Info");
+    dw::window(1,22,8,18,"Next");
+
     gm::init();
     gm::startListener();    
 }
@@ -25,13 +33,7 @@ void loop()
     {
         gm::process();
 
-        tc::clearScreen();
-        tc::setCursor(1, 1);
-        dw::window(1,1,9,6,"Hold");
-        dw::window(1,10,12,22,"Tetriz");
-        dw::window(7,1,9,16,"Status");
-        dw::window(19,22,8,4,"Info");
-        dw::window(1,22,8,18,"Next");
+
         tc::setCursor(10,4);
         cout << "FPS:" << ut::fps();
 
@@ -42,7 +44,7 @@ void loop()
         dw::frame(gm::frame, 2, 11);
 
         tc::resetColor();
-        this_thread::sleep_for(chrono::milliseconds(100));
+        // this_thread::sleep_for(chrono::milliseconds(100));
     }
 }
 

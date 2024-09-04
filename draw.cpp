@@ -87,33 +87,40 @@ namespace dw{                    //0123456
     }
     void frame(Matrix& m, int top, int left)
     {
+        static Matrix buffer(m.size(), std::vector<int>(m[0].size(), -1));
+        std::ostringstream oss;
+
         // frame xy -> col row
         int row, col;
         for (int x = 0; x < 10; x++)
         {
             for (int y = 0; y < 20; y++)
             {
+                if (m[x][y] == buffer[x][y]) continue;
+                buffer[x][y] = m[x][y];
+
                 row = 20 - y - 1 + top;
                 col = x + left;
-                tc::setCursor(row, ut::b2c(col));
+                tc::setCursor(row, ut::b2c(col), oss);
                 if (m[x][y] > 0)
                 {
-                    tc::resetColor();
-                    tc::setBackColor(m[x][y]);
-                    std::cout << "  ";
+                    tc::resetColor(oss);
+                    tc::setBackColor(m[x][y], oss);
+                    oss << "  ";
                 }
                 else if (m[x][y] < 0)
                 {
-                    tc::resetColor();
-                    tc::setForeColor(-m[x][y]);
-                    std::cout << "\u25E3\u25E5";
+                    tc::resetColor(oss);
+                    tc::setForeColor(-m[x][y], oss);
+                    oss << "\u25E3\u25E5";
                 }
                 else
                 {
-                    tc::resetColor();
-                    std::cout << "\u30FB";
+                    tc::resetColor(oss);
+                    oss << "\u30FB";
                 }
             }
         }
+        std::cout << oss.str();
     }
 }

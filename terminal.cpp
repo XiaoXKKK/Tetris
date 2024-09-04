@@ -3,24 +3,23 @@
 
 #define CSI "\033["
 
-void tc::setCursor(int r, int c)
+void tc::setCursor(int r, int c, std::ostream &os)
 {
-    std::cout << CSI << r << ";" << c << "H";
+    os << CSI << r << ";" << c << "H";
 }
 
-void tc::setForeColor(int c)
+void tc::setForeColor(int c, std::ostream &os)
 {
-    std::cout << CSI << "38;5;" << c << "m";
+    os << CSI << "38;5;" << c << "m";
 }
 
-void tc::setBackColor(int c)
+void tc::setBackColor(int c, std::ostream &os)
 {
-    std::cout << CSI << "48;5;" << c << "m";
+    os << CSI << "48;5;" << c << "m";
 }
-
-void tc::resetColor()
+void tc::resetColor(std::ostream &os)
 {
-    std::cout << CSI << "0m";
+    os << CSI << "0m";
 }
 
 void tc::clearScreen()

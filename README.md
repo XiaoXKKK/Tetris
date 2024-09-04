@@ -29,3 +29,9 @@ Allowing WallKick Table that follows it.
 
 ## 7 - Draw a frame
 [Shadow Blocks](https://symbl.cc/en/unicode/blocks/geometric-shapes/)
+
+## 8 - Performance Optimization
+Draw background once
+Add frame buffer & sstream buffer
+
+40 fps -> 6600 fps

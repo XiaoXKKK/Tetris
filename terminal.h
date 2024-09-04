@@ -1,17 +1,18 @@
 #pragma once
+#include "define.h"
 
 namespace tc { // terminal control
     // Set the cursor position to row r and column c.
-    void setCursor(int r, int c);
+    void setCursor(int r, int c, std::ostream &os = std::cout);
 
     // Set the foreground color to the 8-bit color code c.
-    void setForeColor(int c);
+    void setForeColor(int c, std::ostream &os = std::cout);
 
     // Set the background color to the 8-bit color code c.
-    void setBackColor(int c);
+    void setBackColor(int c, std::ostream &os = std::cout);
 
     // Reset the text color to the default.
-    void resetColor();
+    void resetColor(std::ostream &os = std::cout);
 
     // Clear the screen.
     void clearScreen();
