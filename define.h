@@ -13,6 +13,7 @@
 #include <ranges>
 #include <sstream>
 #include <ctime>
+#include <queue>
 
 using namespace std::chrono_literals;
 
@@ -35,3 +36,5 @@ using namespace std::chrono_literals;
 using Matrix = std::vector<std::vector<int>>;
 using Tetromino = std::array<std::array<std::pair<int,int>, 4>, 4>;
 using std::ranges::views::iota;
+
+#define PREVIEW 5

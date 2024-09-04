@@ -88,18 +88,37 @@ namespace dw{                    //0123456
     void frame(Matrix& m, int top, int left)
     {
         static Matrix buffer(m.size(), std::vector<int>(m[0].size(), -1));
+        Matrix tmp(m.begin(), m.begin() + 20);
+        matrix(tmp, top, left, &buffer, "\u30fb");
+    }
+    void next(std::queue<Tetromino> q, int top, int left)
+    {
+        static Matrix buffer(15, std::vector<int>(6, -1));
+        Matrix tmp(15, std::vector<int>(6, 0));
+        for (int y = 12, j = 0; j < PREVIEW; j++, y -= 3)
+        {
+            gm::Piece p(q.front(), 2, y, 0);
+            gm::merge(tmp, p);
+            q.pop();
+        }
+        matrix(tmp, top, left, &buffer, "  ");
+    }
+    void matrix(const Matrix& m, int top, int left, Matrix* buffer, std::string blank)
+    {
         std::ostringstream oss;
 
         // frame xy -> col row
         int row, col;
-        for (int x = 0; x < 10; x++)
+        for (int x = 0; x < m[0].size(); x++)
         {
-            for (int y = 0; y < 20; y++)
+            for (int y = 0; y < m.size(); y++)
             {
-                if (m[y][x] == buffer[y][x]) continue;
-                buffer[y][x] = m[y][x];
+                if (buffer != nullptr) {
+                    if (m[y][x] == (*buffer)[y][x]) continue;
+                    (*buffer)[y][x] = m[y][x];
+                }
 
-                row = 20 - y - 1 + top;
+                row = m.size() - y - 1 + top;
                 col = x + left;
                 tc::setCursor(row, ut::b2c(col), oss);
                 if (m[y][x] > 0)
@@ -112,12 +131,12 @@ namespace dw{                    //0123456
                 {
                     tc::resetColor(oss);
                     tc::setForeColor(-m[y][x], oss);
-                    oss << "\u25E3\u25E5";
+                    oss << "\u2591\u2591";
                 }
                 else
                 {
                     tc::resetColor(oss);
-                    oss << "\u30FB";
+                    oss << blank;
                 }
             }
         }

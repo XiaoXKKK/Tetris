@@ -38,3 +38,6 @@ Add frame buffer & sstream buffer
 
 ## 9 - Drop & Lock & Clear
 Rotation Bug fixed
+
+## 10 - Bag-7 Randomizer & Preview
+[Randomizer History](https://simon.lc/the-history-of-tetris-randomizers)

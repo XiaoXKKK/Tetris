@@ -12,6 +12,7 @@ namespace gm{
     extern Matrix playfield;
     extern std::chrono::milliseconds duration;
     extern Matrix frame;
+    extern std::queue<Tetromino> next_pieces;
 
     // extern int row, col;
     // extern Tetromino_0 cur;
@@ -20,12 +21,16 @@ namespace gm{
 
     // init game
     void init();
-    // render game
+    // render a frame
     void render();
+    // code reuse
+    void merge(Matrix &m, Piece &p);
     // process game
     void process();
     // pick a piece
     Piece pick();
+    // preview the next 5 pieces
+    void preview();
     // lock the piece when it reaches the bottom
     void lock();
     // clear the full lines

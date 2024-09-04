@@ -42,6 +42,8 @@ void loop()
         // tc::setForeColor(214);
         // cout << "  " << flush;
         dw::frame(gm::frame, 2, 11);
+        dw::next(gm::next_pieces, 2, 23);
+
 
         tc::resetColor();
         // this_thread::sleep_for(chrono::milliseconds(100));

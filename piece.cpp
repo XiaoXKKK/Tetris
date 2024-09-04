@@ -18,10 +18,15 @@ namespace gm {
 
     int Piece::get_color()
     {
-        return tetro_set[index][0].second;
+        return status?tetro_set[index][0].second:-tetro_set[index][0].second;
     }
 
-    Piece::Piece(Tetromino& t, int x, int y, int index) : tetro_set(t), x(x), y(y), index(index)
+    void Piece::set_ghost()
+    {
+        status = 0;
+    }
+
+    Piece::Piece(Tetromino& t, int x, int y, int index) : tetro_set(t), x(x), y(y), index(index), status(1)
     {
     }
 

@@ -8,6 +8,7 @@ namespace gm {
     Matrix playfield;
     Matrix frame;
     std::chrono::milliseconds duration;
+    std::queue<Tetromino> next_pieces;
 
     void init() {
         running = true;
@@ -17,21 +18,35 @@ namespace gm {
         duration = 1000ms;
         frame = playfield;
         srand(time(0));
+        preview();
         one_piece = pick();
     }
     Piece pick() {
-        std::vector<Tetromino> bag7 = { i, j, l, o, s, t, z };
-        Piece p = Piece(bag7[rand() % 7], 4, 20, 0);
+        // Truly Pseudo Random
+        // std::vector<Tetromino> bag7 = { i, j, l, o, s, t, z };
+        // Piece p = Piece(bag7[rand() % 7], 4, 20, 0);
+        
+        Piece p = Piece(next_pieces.front(), 4, 20, 0);
+        next_pieces.pop();
+        preview();
         p.set_playfield(std::make_shared<Matrix>(playfield));
         return std::move(p);
     }
+
+    void preview()
+    {
+        static std::vector<Tetromino> bag7 = { i, j, l, o, s, t, z };
+        if (next_pieces.size() < PREVIEW) {
+            std::random_shuffle(bag7.begin(), bag7.end());
+            for (auto i : bag7) {
+                next_pieces.push(i);
+            }
+        }
+    }
+    
     void lock()
     {
-        auto [x, y] = one_piece.get_pos();
-        for (auto i : iota(0, 4)) {
-            auto [dx, dy] = one_piece.get_mino(i);
-            playfield[y + dy][x + dx] = one_piece.get_color();
-        }
+        merge(playfield, one_piece);
     }
     void clear() {
         // lg::log(playfield);
@@ -55,20 +70,21 @@ namespace gm {
     }
     void render() {
         frame = playfield;
-        // render the curre n t piece
-        auto [x, y] = one_piece.get_pos();
-        for (auto i : iota(0, 4)) {
-            auto [dx, dy] = one_piece.get_mino(i);
-            frame[y + dy][x + dx] = one_piece.get_color();
-        }
+        // render the current piece
+        merge(frame, one_piece);
         // render the destination of the current piece
-        while (one_piece.test(x, --y));
-        y++;
-
+        auto ghost = one_piece;
+        ghost.set_ghost();
+        while(ghost.down());
+        merge(frame, ghost);
+    }
+    void merge(Matrix& m, Piece& p)
+    {
+        auto [x, y] = p.get_pos();
         for (auto i : iota(0, 4)) {
-            auto [dx, dy] = one_piece.get_mino(i);
-            if (frame[y + dy][x + dx] == 0)
-                frame[y + dy][x + dx] = 0 - one_piece.get_color();
+            auto [dx, dy] = p.get_mino(i);
+            if(m[y + dy][x + dx] == 0)
+                m[y + dy][x + dx] = p.get_color();
         }
     }
     void process() {

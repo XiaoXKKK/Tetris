@@ -6,7 +6,7 @@ namespace gm {
     class Piece
     {
     private:
-
+        int status; // 1: common 0: ghost
         Tetromino tetro_set;
         int x, y;
         int index;// [0, R, 2, L]
@@ -17,6 +17,7 @@ namespace gm {
         int get_color();
         bool test(int x, int y, int next_idx = -1);
         Piece() = default;
+        void set_ghost();
         Piece(Tetromino& t, int x, int y, int index = 0);
         void set_playfield(std::shared_ptr<Matrix> sp);
 
