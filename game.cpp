@@ -108,8 +108,8 @@ namespace gm {
     void quit() {
         running = false;
     }
-    void rotate() {
-        one_piece.rotate();
+    void rotate(int i) {
+        one_piece.rotate(i);
     }
     void down() {
         one_piece.down();

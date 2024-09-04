@@ -41,3 +41,5 @@ Rotation Bug fixed
 
 ## 10 - Bag-7 Randomizer & Preview
 [Randomizer History](https://simon.lc/the-history-of-tetris-randomizers)
+
+## 11 - SRS & Wallkick

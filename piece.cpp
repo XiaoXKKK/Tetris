@@ -28,6 +28,10 @@ namespace gm {
 
     Piece::Piece(Tetromino& t, int x, int y, int index) : tetro_set(t), x(x), y(y), index(index), status(1)
     {
+        char name = tetro_set[index][0].first;
+        if (name == 'I') offset = gm::offset_i;
+        else if (name == 'O') offset = gm::offset_o;
+        else offset = gm::offset;
     }
 
     void Piece::set_playfield(std::shared_ptr<Matrix> sp)
@@ -60,13 +64,17 @@ namespace gm {
         return move(1, 0);
     }
 
-    bool Piece::rotate()
+    bool Piece::rotate(int i)
     {
         // TODO: check if the rotation is valid
-        int next_idx = (index + 1) % 4;
-        if (test(x, y, next_idx)) {
-            index = next_idx;
-            return true;
+        int next_idx = (index + i) % 4;
+        for (auto i : iota(0, (int)offset.size())) {
+            auto [dx_0, dy_0] = offset[i][index];
+            auto [dx_1, dy_1] = offset[i][next_idx];
+            if (test(x + dx_1 - dx_0, y + dy_1 - dy_0, next_idx)) {
+                index = next_idx;
+                return true;
+            }
         }
         return false;
     }

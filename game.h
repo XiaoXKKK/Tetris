@@ -37,7 +37,7 @@ namespace gm{
     void clear();
     // key event
     void quit();
-    void rotate();
+    void rotate(int i);
     void down();
     void left();
     void right();

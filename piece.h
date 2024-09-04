@@ -8,6 +8,7 @@ namespace gm {
     private:
         int status; // 1: common 0: ghost
         Tetromino tetro_set;
+        Offset offset;
         int x, y;
         int index;// [0, R, 2, L]
         std::shared_ptr<Matrix> sp_playfield;
@@ -25,6 +26,6 @@ namespace gm {
         bool down();
         bool left();
         bool right();
-        bool rotate();
+        bool rotate(int i);
     };
 }

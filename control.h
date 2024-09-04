@@ -9,7 +9,9 @@ namespace gm{
     void startListener();
     
     void commquit();
-    void commrotate();
+    void commrotatecw();
+    void commrotateccw();
+    void commrotate180();
     void commdown();
     void commleft();
     void commright();

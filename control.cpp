@@ -8,12 +8,14 @@ namespace gm
     char command;
 
     std::map<char, std::function<void()>> commandMap{
-        {KEY_Q, commquit},
-        {KEY_W, commrotate},
-        {KEY_S, commdown},
-        {KEY_A, commleft},
-        {KEY_D, commright},
-        {KEY_SPACE,commdrop}
+        {KEY_QUIT, commquit},
+        {KEY_ROTATECW, commrotatecw},
+        {KEY_ROTATECCW, commrotateccw},
+        {KEY_ROTATE180, commrotate180},
+        {KEY_SOFTDOWN, commdown},
+        {KEY_LEFT, commleft},
+        {KEY_RIGHT, commright},
+        {KEY_HARDDOWN, commdrop}
     };
 
     void keyEvent(){
@@ -37,10 +39,16 @@ namespace gm
     {
         quit();
     }
-    void commrotate(){
-        rotate();
+    void commrotatecw(){
+        rotate(1);
     }
-    void commdown(){
+    void commrotateccw(){
+        rotate(3);
+    }
+    void commrotate180(){
+        rotate(2);
+    }
+    void commdown() {
         down();
     }
     void commleft(){
