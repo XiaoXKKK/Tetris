@@ -85,4 +85,35 @@ namespace dw{                    //0123456
             std::cout << "  ";
         }
     }
+    void frame(Matrix& m, int top, int left)
+    {
+        // frame xy -> col row
+        int row, col;
+        for (int x = 0; x < 10; x++)
+        {
+            for (int y = 0; y < 20; y++)
+            {
+                row = 20 - y - 1 + top;
+                col = x + left;
+                tc::setCursor(row, ut::b2c(col));
+                if (m[x][y] > 0)
+                {
+                    tc::resetColor();
+                    tc::setBackColor(m[x][y]);
+                    std::cout << "  ";
+                }
+                else if (m[x][y] < 0)
+                {
+                    tc::resetColor();
+                    tc::setForeColor(-m[x][y]);
+                    std::cout << "\u25E3\u25E5";
+                }
+                else
+                {
+                    tc::resetColor();
+                    std::cout << "\u30FB";
+                }
+            }
+        }
+    }
 }

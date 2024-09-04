@@ -1,6 +1,6 @@
 #pragma once
 
-#include <string>
+#include "define.h"
 
 namespace ut {
     // Return the frames per second.
@@ -11,4 +11,5 @@ namespace ut {
     inline int b2c(int block){
         return block * 2 - 1;
     }
+    bool timer(std::chrono::milliseconds ms);
 }

@@ -1,6 +1,9 @@
 # CMake minimum version requirement
 cmake_minimum_required(VERSION 3.10)
 
+# Set C++ standard
+set(CMAKE_CXX_STANDARD 20)
+
 # Project name
 project(Tetris)
 
@@ -21,6 +24,8 @@ set(SOURCES
     tetromino.cpp
     tetromino.h
     color.h
+    piece.cpp
+    piece.h
 )
 
 # Add executable target

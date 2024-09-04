@@ -4,8 +4,6 @@
 
 using Tetromino_0 = std::vector<std::vector<int>>;
 
-using Tetromino = std::array<std::array<std::pair<int,int>, 4>, 4>;
-
 namespace gm {
     extern Tetromino_0 I, O, T, S, Z, J, L;
 

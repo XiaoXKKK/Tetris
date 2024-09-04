@@ -8,5 +8,7 @@ enum class Color : int
     Yellow = 11,
     Green = 2,
     Blue = 12,
-    Purple = 5
+    Purple = 5,
+    White = 15,
+    Black = 0
 };

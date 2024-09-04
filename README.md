@@ -26,3 +26,6 @@ tc: terminal control
 ## 6.1 - Offset Representation
 [SRS](https://harddrop.com/wiki/SRS)
 Allowing WallKick Table that follows it.
+
+## 7 - Draw a frame
+[Shadow Blocks](https://symbl.cc/en/unicode/blocks/geometric-shapes/)

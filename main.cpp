@@ -23,8 +23,10 @@ void loop()
     int i = 1;
     while(gm::running)   
     {
+        gm::process();
+
         tc::clearScreen();
-        tc::setCursor(1,1);
+        tc::setCursor(1, 1);
         dw::window(1,1,9,6,"Hold");
         dw::window(1,10,12,22,"Tetriz");
         dw::window(7,1,9,16,"Status");
@@ -37,7 +39,7 @@ void loop()
         // tc::setBackColor(15);
         // tc::setForeColor(214);
         // cout << "  " << flush;
-        dw::tetromino(gm::cur_s, gm::row, gm::col, gm::index);
+        dw::frame(gm::frame, 2, 11);
 
         tc::resetColor();
         this_thread::sleep_for(chrono::milliseconds(100));
