@@ -7,13 +7,16 @@
 #include "define.h"
 
 namespace gm{
-    extern bool running, locking, holding;
+    extern bool running, locking, holding, end;
     extern Piece one_piece;
     extern Matrix playfield;
     extern std::chrono::milliseconds duration;
     extern Matrix frame;
     extern std::queue<Tetromino> next_pieces;
     extern Tetromino hold_piece;
+    extern int score;
+    extern int level;
+    extern int lines;
 
     // extern int row, col;
     // extern Tetromino_0 cur;

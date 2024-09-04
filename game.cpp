@@ -3,18 +3,22 @@
 
 
 namespace gm {
-    bool running, locking, holding;
+    bool running, locking, holding, end;
     Piece one_piece;
     Matrix playfield;
     Matrix frame;
     std::chrono::milliseconds duration;
     std::queue<Tetromino> next_pieces;
     Tetromino hold_piece;
-
+    int score;
+    int level;
+    int lines;
+    
     void init() {
         running = true;
         locking = false;
         holding = false;
+        end = false;
         // playfield[y][x]
         playfield = Matrix(22, std::vector<int>(10, 0));
         duration = 1000ms;
@@ -23,6 +27,8 @@ namespace gm {
         preview();
         one_piece = pick();
         hold_piece.clear();
+        score = 0;
+        level = 1;
     }
     Piece pick() {
         // Truly Pseudo Random
@@ -33,6 +39,9 @@ namespace gm {
         next_pieces.pop();
         preview();
         p.set_playfield(std::make_shared<Matrix>(playfield));
+        if (!p.test(4, 20)) {
+            end = true;
+        }
         return std::move(p);
     }
 
@@ -66,10 +75,28 @@ namespace gm {
                 it = playfield.erase(it);
                 playfield.push_back(std::vector<int>(it->size(), 0));
                 count++;
-            } else {
+            }
+            else {
                 it++;
             }
         }
+        switch (count) {
+        case 1:
+            score += 100 * level;
+            break;
+        case 2:
+            score += 300 * level;
+            break;
+        case 3:
+            score += 500 * level;
+            break;
+        case 4:
+            score += 800 * level;
+            break;
+        default:
+            break;
+        }
+        lines += count;
     }
     void render() {
         frame = playfield;
@@ -90,7 +117,13 @@ namespace gm {
                 m[y + dy][x + dx] = p.get_color();
         }
     }
+    void levelup() {
+        level = lines / 10 + 1;
+        duration = std::chrono::milliseconds((int)(pow(0.8 - (level - 1) * 0.007, level - 1) * 1000));
+    }
+
     void process() {
+        if (end) return;
         render();
         if (ut::timer(duration)) {
             if (one_piece.down()) {
@@ -99,6 +132,7 @@ namespace gm {
             if (locking) {
                 lock();
                 clear();
+                levelup();
                 one_piece = pick();
                 locking = false;
                 holding = false;
@@ -117,6 +151,7 @@ namespace gm {
     }
     void down() {
         one_piece.down();
+        score++;
     }
     void left() {
         one_piece.left();
@@ -125,7 +160,8 @@ namespace gm {
         one_piece.right();
     }
     void drop() {
-        while (one_piece.down());
+        while (one_piece.down())
+            score += 2;
         locking = true;
     }
     void hold() {
@@ -145,3 +181,14 @@ namespace gm {
         holding = true;
     }
 }
+
+/**
+ *      https://harddrop.com/wiki/Scoring
+ * 
+ * Single	100 x level	
+ * Double	300 x level	
+ * Triple	500 x level	
+ * Tetris	800 x level	
+ * Soft drop	1 point per cell	
+ * Hard drop	2 points per cell	
+**/

@@ -46,3 +46,6 @@ Rotation Bug fixed
 
 ## 12 - Hold piece
 [Hold piece](https://harddrop.com/wiki/Hold_piece)
+
+## 13 - Scoring & Level up
+[Scoring](https://harddrop.com/wiki/Scoring)
