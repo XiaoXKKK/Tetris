@@ -3,7 +3,7 @@
 
 
 namespace gm {
-    bool running, locking, holding, end;
+    bool running, locking, holding, end, helping, reseting;
     Piece one_piece;
     Matrix playfield;
     Matrix frame;
@@ -18,6 +18,8 @@ namespace gm {
         running = true;
         locking = false;
         holding = false;
+        helping = false;
+        reseting = false;
         end = false;
         // playfield[y][x]
         playfield = Matrix(22, std::vector<int>(10, 0));
@@ -29,6 +31,7 @@ namespace gm {
         hold_piece.clear();
         score = 0;
         level = 1;
+        lines = 0;
     }
     Piece pick() {
         // Truly Pseudo Random
@@ -123,7 +126,7 @@ namespace gm {
     }
 
     void process() {
-        if (end) return;
+        if (end || helping) return;
         render();
         if (ut::timer(duration)) {
             if (one_piece.down()) {
@@ -136,6 +139,7 @@ namespace gm {
                 one_piece = pick();
                 locking = false;
                 holding = false;
+                reseting = false;
             }
             else {
                 locking = true;
@@ -163,6 +167,15 @@ namespace gm {
         while (one_piece.down())
             score += 2;
         locking = true;
+    }
+    void reset() {
+        init();
+        reseting = true;
+    }
+    void help()
+    {
+        helping = !helping;
+        reseting = !helping;
     }
     void hold() {
         if (holding) {

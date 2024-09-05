@@ -49,3 +49,6 @@ Rotation Bug fixed
 
 ## 13 - Scoring & Level up
 [Scoring](https://harddrop.com/wiki/Scoring)
+
+## 14 - Layout organization
+

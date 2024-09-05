@@ -17,5 +17,7 @@ namespace gm{
     void commright();
     void commdrop();
     void commhold();
+    void commhelp();
+    void commreset();
 
 }

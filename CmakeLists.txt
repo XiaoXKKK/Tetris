@@ -28,6 +28,8 @@ set(SOURCES
     piece.h
     log.cpp
     log.h
+    window.cpp
+    window.h
 )
 
 # Add executable target

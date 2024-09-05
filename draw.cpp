@@ -34,7 +34,7 @@ namespace dw{                    //0123456
         {
             std::cout << ut::utf32_to_utf8({style[1], style[1]});
         }
-        std::cout << ut::utf32_to_utf8({style[4]});
+        std::cout << ut::utf32_to_utf8({style[4]}) << ' ';
         // last line
         tc::setCursor(top + height - 1, ut::b2c(left));
         std::cout << ut::utf32_to_utf8({style[0], style[5]});
@@ -42,14 +42,14 @@ namespace dw{                    //0123456
         {
             std::cout << ut::utf32_to_utf8({style[1], style[1]});
         }
-        std::cout << ut::utf32_to_utf8({style[6]});
+        std::cout << ut::utf32_to_utf8({style[6]}) << ' ';
         // middle lines
         for (int i = top + 1; i < top + height - 1; i++)
         {
             tc::setCursor(i, ut::b2c(left));
             std::cout << ut::utf32_to_utf8({style[0], style[2]});
             tc::setCursor(i, ut::b2c(left) + (weight - 1) * 2);
-            std::cout << ut::utf32_to_utf8({style[2]});
+            std::cout << ut::utf32_to_utf8({style[2]}) << ' ';
         }
         // title
         tc::setCursor(top, ut::b2c(left) + (weight * 2 - title.size()) / 2);
@@ -88,6 +88,9 @@ namespace dw{                    //0123456
     void frame(Matrix& m, int top, int left)
     {
         static Matrix buffer(m.size(), std::vector<int>(m[0].size(), -1));
+        if(gm::reseting){
+            buffer = Matrix(m.size(), std::vector<int>(m[0].size(), -1));
+        }
         Matrix tmp(m.begin(), m.begin() + 20);
         matrix(tmp, top, left, &buffer, "\u30fb");
     }

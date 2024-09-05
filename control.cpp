@@ -16,7 +16,9 @@ namespace gm
         {KEY_LEFT, commleft},
         {KEY_RIGHT, commright},
         {KEY_HARDDOWN, commdrop},
-        {KEY_HOLD, commhold}
+        {KEY_HOLD, commhold},
+        {KEY_HELP, commhelp},
+        {KEY_RESET, commreset}
     };
 
     void keyEvent(){
@@ -26,6 +28,14 @@ namespace gm
             command = _getch();
             if (commandMap.find(command) != commandMap.end())
             {
+                if(helping && command != KEY_HELP && command != KEY_QUIT)
+                {
+                    continue;
+                }
+                if(end && command != KEY_RESET && command != KEY_QUIT)
+                {
+                    continue;
+                }
                 commandMap[command]();
             }
         }
@@ -65,5 +75,13 @@ namespace gm
     void commhold()
     {
         hold();
+    }
+    void commhelp()
+    {
+        help();
+    }
+    void commreset()
+    {
+        reset();
     }
 }

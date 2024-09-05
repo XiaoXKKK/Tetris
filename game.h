@@ -7,7 +7,7 @@
 #include "define.h"
 
 namespace gm{
-    extern bool running, locking, holding, end;
+    extern bool running, locking, holding, end, helping, reseting;
     extern Piece one_piece;
     extern Matrix playfield;
     extern std::chrono::milliseconds duration;
@@ -39,6 +39,8 @@ namespace gm{
     void lock();
     // clear the full lines
     void clear();
+    // level up
+    void levelup();
     // key event
     void hold();
     void quit();
@@ -47,4 +49,6 @@ namespace gm{
     void left();
     void right();
     void drop();
+    void help();
+    void reset();
 }

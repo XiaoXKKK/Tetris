@@ -36,6 +36,8 @@ using namespace std::chrono_literals;
 #define KEY_LEFT 'a'
 #define KEY_RIGHT 'd'
 #define KEY_HARDDOWN ' '
+#define KEY_HELP 'p'
+#define KEY_RESET 'r'
 
 using Matrix = std::vector<std::vector<int>>;
 using Tetromino = std::vector<std::vector<std::pair<int, int>>>;
