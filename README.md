@@ -52,3 +52,12 @@ Rotation Bug fixed
 
 ## 14 - Layout organization
 
+---
+
+## 15 - T-Spin 
+Update & Fix SRS 
+[T-spin](https://harddrop.com/wiki/T-Spin)
+
+1. Tetromino being locked is T.
+2. Last successful movement of the tetromino was a rotate, as opposed to sideways movement, downward movement, or falling due to gravity. 
+3. Three of the 4 squares diagonally adjacent to the T's center are occupied.

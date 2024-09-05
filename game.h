@@ -5,6 +5,8 @@
 #include "utils.h"
 #include "draw.h"
 #include "define.h"
+#include "control.h"
+#include "window.h"
 
 namespace gm{
     extern bool running, locking, holding, end, helping, reseting;
@@ -17,6 +19,7 @@ namespace gm{
     extern int score;
     extern int level;
     extern int lines;
+    extern int t_spin;
 
     // extern int row, col;
     // extern Tetromino_0 cur;
@@ -28,7 +31,7 @@ namespace gm{
     // render a frame
     void render();
     // code reuse
-    void merge(Matrix &m, Piece &p);
+    void merge(Matrix &m, Piece &p, bool check = false);
     // process game
     void process();
     // pick a piece

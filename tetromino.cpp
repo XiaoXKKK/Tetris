@@ -93,11 +93,11 @@ namespace gm {
         {{{'S',(int)Color::Green},{-1,-1},{0,-1},{1,0}}},// 2
         {{{'S',(int)Color::Green},{-1,1},{-1,0},{0,-1}}},//L
     } };
-    Tetromino t{ {
-        {{{'T',(int)Color::Purple},{-1,0},{0,1},{1,0}}},//0
-        {{{'T',(int)Color::Purple},{0,1},{1,0},{0,-1}}},// R
+    Tetromino t{ { // t[3] is the external point  
+        {{{'T',(int)Color::Purple},{-1,0},{1,0},{0,1}}},//0
+        {{{'T',(int)Color::Purple},{0,1},{0,-1},{1,0}}},// R
         {{{'T',(int)Color::Purple},{-1,0},{1,0},{0,-1}}},//2
-        {{{'T',(int)Color::Purple},{-1,0},{0,1},{0,-1}}},//L
+        {{{'T',(int)Color::Purple},{0,1},{0,-1},{-1,0}}},//L
     } };
     Tetromino z{ {
         {{{'Z',(int)Color::Red},{-1,1},{0,1},{1,0}}},//0

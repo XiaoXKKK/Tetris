@@ -13,7 +13,8 @@ namespace gm {
     int score;
     int level;
     int lines;
-    
+    int t_spin;
+
     void init() {
         running = true;
         locking = false;
@@ -32,6 +33,7 @@ namespace gm {
         score = 0;
         level = 1;
         lines = 0;
+        t_spin = 0;
     }
     Piece pick() {
         // Truly Pseudo Random
@@ -61,7 +63,7 @@ namespace gm {
     
     void lock()
     {
-        merge(playfield, one_piece);
+        merge(playfield, one_piece, true);
     }
     void clear() {
         // lg::log(playfield);
@@ -83,22 +85,29 @@ namespace gm {
                 it++;
             }
         }
+        int base = 0;
         switch (count) {
+        case 0:
+            base = t_spin == 1 ? 400 : t_spin == 2 ? 100 : 0;
+            break;
         case 1:
-            score += 100 * level;
+            base = t_spin == 1 ? 800 : t_spin == 2 ? 200 : 100;
             break;
         case 2:
-            score += 300 * level;
+            base = t_spin == 1 ? 1200 : t_spin == 2 ? 400 : 300;
             break;
         case 3:
-            score += 500 * level;
+            base = t_spin == 1 ? 1600 : 500;
             break;
         case 4:
-            score += 800 * level;
+            base = 800;
             break;
         default:
             break;
         }
+        score += base * level;
+        ui::show_clear(count, t_spin);
+        t_spin = 0;
         lines += count;
     }
     void render() {
@@ -111,13 +120,54 @@ namespace gm {
         while(ghost.down());
         merge(frame, ghost);
     }
-    void merge(Matrix& m, Piece& p)
+    void merge(Matrix& m, Piece& p, bool check)
     {
+        // check T-spin 
+        static auto check_corner = [&m, &p]() {
+            int dx[4] = { 1, 1, -1, -1 };
+            int dy[4] = { 1, -1, 1, -1 };
+            auto [x, y] = p.get_pos();
+            int count = 0;
+            int bx, by;
+            for (auto i : iota(0, 4)) {
+                if (y + dy[i] < 0 || y + dy[i] >= m.size() || x + dx[i] < 0 || x + dx[i] >= m[0].size() || \
+                    m[y + dy[i]][x + dx[i]] != 0) {
+                    count++;
+                }
+                else {
+                    bx = x + dx[i];
+                    by = y + dy[i];
+                }
+            }
+            if (count == 3) {
+                if(m[by][x] && m[y][bx]) {
+                    return 2; // Mini T-Spin
+                }
+                return 1; // T-Spin
+            }
+            return 0;
+            };
+        
         auto [x, y] = p.get_pos();
         for (auto i : iota(0, 4)) {
             auto [dx, dy] = p.get_mino(i);
             if(m[y + dy][x + dx] == 0)
                 m[y + dy][x + dx] = p.get_color();
+        }
+        // check T-spin 
+        if (check && p.get_name() == 'T') {
+            int result = check_corner();
+            lg::log("T-Spin: " + std::to_string(result));
+            if (result > 0 && (gm::command == KEY_ROTATECCW || gm::command == KEY_ROTATECW || gm::command == KEY_ROTATE180)) {
+                if (result == 2 && p.get_last_kick() != 4) {
+                    t_spin = 2;
+                    lg::log("Mini T-Spin");
+                }
+                else {
+                    t_spin = 1;
+                    lg::log("T-Spin");
+                }
+            }
         }
     }
     void levelup() {
@@ -196,12 +246,19 @@ namespace gm {
 }
 
 /**
- *      https://harddrop.com/wiki/Scoring
+ *      https://harddrop.com/wiki/Scoring 2009 guideline
  * 
- * Single	100 x level	
- * Double	300 x level	
- * Triple	500 x level	
- * Tetris	800 x level	
- * Soft drop	1 point per cell	
- * Hard drop	2 points per cell	
+ * Single               100 x level     
+ * Double               300 x level     
+ * Triple               500 x level     
+ * Tetris               800 x level
+ * T-Spin Mini          100 x level
+ * T-Spin               400 x level
+ * Mini T-Spin Single   200 x level
+ * T-Spin Single        800 x level
+ * Mini T-Spin Double   1200 x level
+ * T-Spin Double        1200 x level
+ * T-Spin Triple        1600 x level
+ * Soft drop            1 point per cell
+ * Hard drop            2 points per cell     
 **/

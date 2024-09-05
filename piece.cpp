@@ -22,6 +22,16 @@ namespace gm {
         return status ? tetro_set[index][0].second : -tetro_set[index][0].second;
     }
 
+    char Piece::get_name()
+    {
+        return tetro_set[index][0].first;
+    }
+
+    int Piece::get_last_kick()
+    {
+        return last_kick;
+    }
+
     void Piece::set_ghost()
     {
         status = 0;
@@ -37,7 +47,7 @@ namespace gm {
         return tetro_set;
     }
 
-    Piece::Piece(Tetromino& t, int x, int y, int index) : tetro_set(t), x(x), y(y), index(index), status(1)
+    Piece::Piece(Tetromino& t, int x, int y, int index) : tetro_set(t), x(x), y(y), index(index), status(1), last_kick(-1)
     {
         char name = tetro_set[index][0].first;
         if (name == 'I') offset = gm::offset_i;
@@ -77,16 +87,22 @@ namespace gm {
 
     bool Piece::rotate(int i)
     {
-        // TODO: check if the rotation is valid
+        assert(i >= 1 && i < 4);
         int next_idx = (index + i) % 4;
         for (auto i : iota(0, (int)offset.size())) {
-            auto [dx_0, dy_0] = offset[i][index];
-            auto [dx_1, dy_1] = offset[i][next_idx];
-            if (test(x + dx_1 - dx_0, y + dy_1 - dy_0, next_idx)) {
+            auto [dx_0, dy_0] = offset[index][i];
+            auto [dx_1, dy_1] = offset[next_idx][i];
+            auto dx = dx_0 - dx_1;
+            auto dy = dy_0 - dy_1;
+            if (test(x + dx, y + dy, next_idx)) {
+                last_kick = i;
                 index = next_idx;
+                x += dx;
+                y += dy;
                 return true;
             }
         }
+        last_kick = -1;
         return false;
     }
 

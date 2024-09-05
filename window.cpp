@@ -71,4 +71,15 @@ namespace ui {
         tc::setCursor(21,ut::b2c(24));
         std::cout << "help [p]";
     }
+    void show_clear(int count, int t_spin)
+    {
+        std::string t_spin_str = t_spin == 1 ? "T-Spin" : t_spin == 2 ? "Mini T-Spin" : "";
+        std::string clear_str = count == 1 ? "Single" : count == 2 ? "Double" : count == 3 ? "Triple" : count == 4 ? "Tetris": "";
+        tc::setCursor(16, 4);
+        tc::setForeColor((int)Color::Orange);
+        std::cout << std::setw(10) << t_spin_str << std::flush;
+        tc::setCursor(17, 4);
+        tc::setForeColor((int)Color::Yellow);
+        std::cout << std::setw(10) << clear_str << std::flush;
+    }
 }
