@@ -20,6 +20,9 @@ namespace gm{
     extern int level;
     extern int lines;
     extern int t_spin;
+    extern std::random_device rd;
+    extern std::mt19937 g;
+    extern int b2b, combo;
 
     // extern int row, col;
     // extern Tetromino_0 cur;

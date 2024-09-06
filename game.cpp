@@ -16,6 +16,7 @@ namespace gm {
     int t_spin;
     std::random_device rd;
     std::mt19937 g(rd());
+    int b2b, combo;
 
     void init() {
         running = true;
@@ -35,6 +36,8 @@ namespace gm {
         level = 1;
         lines = 0;
         t_spin = 0;
+        b2b = 0;
+        combo = 0;
     }
     Piece pick() {
         // Truly Pseudo Random
@@ -106,8 +109,17 @@ namespace gm {
         default:
             break;
         }
-        score += base * level;
-        ui::show_clear(count, t_spin);
+        if (count > 0){
+            combo++;
+        }
+        else combo = 0;
+        if (t_spin > 0 && count > 0 || count == 4){
+            b2b++;
+        }
+        else if (count) b2b = 0;
+        score += 50 * combo * level;
+        score += base * level * (b2b > 1 ? 1.5 : 1);
+        ui::show_clear(count, t_spin, combo, b2b);
         t_spin = 0;
         lines += count;
     }
@@ -144,8 +156,9 @@ namespace gm {
                 if(m[by][x] && m[y][bx]) {
                     return 2; // Mini T-Spin
                 }
-                return 1; // T-Spin
             }
+            if (count >= 3)
+                return 1; // T-Spin
             return 0;
             };
         

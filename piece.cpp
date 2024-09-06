@@ -1,4 +1,5 @@
 #include "piece.h"
+#include "log.h"
 
 namespace gm {
     std::pair<int, int> Piece::get_mino(int i, int next_idx)
@@ -85,17 +86,24 @@ namespace gm {
         return move(1, 0);
     }
 
-    bool Piece::rotate(int i)
+    bool Piece::rotate(int time)
     {
-        assert(i >= 1 && i < 4);
-        int next_idx = (index + i) % 4;
-        for (auto i : iota(0, (int)offset.size())) {
+        assert(time >= 1 && time < 4);
+        int next_idx = (index + time) % 4;
+        for (int i = 0;i < 5;i++) {
             auto [dx_0, dy_0] = offset[index][i];
             auto [dx_1, dy_1] = offset[next_idx][i];
             auto dx = dx_0 - dx_1;
             auto dy = dy_0 - dy_1;
+            if(time == 3){
+                lg::log("Piece " + std::string(1, get_name()));
+                lg::log("Position: " + std::to_string(x) + " " + std::to_string(y));
+                lg::log("Desitnation: " + std::to_string(x + dx) + " " + std::to_string(y + dy));
+                lg::log("Kick: " + std::to_string(i));
+            }
             if (test(x + dx, y + dy, next_idx)) {
                 last_kick = i;
+                if(time == 3) lg::log("success");
                 index = next_idx;
                 x += dx;
                 y += dy;

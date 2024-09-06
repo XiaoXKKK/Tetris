@@ -9,5 +9,5 @@ namespace ui {
     void show_game();
     void show_exit();
     void show_help();
-    void show_clear(int count, int t_spin);
+    void show_clear(int count, int t_spin, int combo, int b2b);
 }

@@ -1,5 +1,6 @@
 #include "window.h"
 #include <iomanip>
+#include "log.h"
 
 namespace ui {
     void show_windows()
@@ -30,7 +31,7 @@ namespace ui {
             tc::setForeColor((int)Color::Red);
             std::cout << "Game Over!";
         }
-
+        /*
         if (gm::helping) {
             tc::setCursor(7, ut::b2c(12));
             std::cout << "Rotate     [" << KEY_ROTATECW << "]    ";
@@ -51,6 +52,7 @@ namespace ui {
             tc::setCursor(15, ut::b2c(12));
             std::cout << "Reset      [" << KEY_RESET << "]    ";
         }
+        */
     }
     void show_game()
     {
@@ -72,8 +74,9 @@ namespace ui {
         tc::setCursor(21,ut::b2c(24));
         std::cout << "help [p]";
     }
-    void show_clear(int count, int t_spin)
+    void show_clear(int count, int t_spin, int combo, int b2b)
     {
+        tc::resetColor();
         std::string t_spin_str = t_spin == 1 ? "T-Spin" : t_spin == 2 ? "Mini T-Spin" : "";
         std::string clear_str = count == 1 ? "Single" : count == 2 ? "Double" : count == 3 ? "Triple" : count == 4 ? "Tetris": "";
         tc::setCursor(16, 4);
@@ -82,5 +85,19 @@ namespace ui {
         tc::setCursor(17, 4);
         tc::setForeColor((int)Color::Yellow);
         std::cout << std::setw(12) << clear_str << std::flush;
+        tc::setCursor(18, 4);
+        tc::setForeColor((int)Color::Green);
+        if (combo > 1){
+            std::cout << "Combo x " << combo << std::flush;
+            lg::log("Combo x " + std::to_string(combo));
+        }
+        else 
+            std::cout << std::setw(12) << "" << std::flush;
+        tc::setCursor(19, 4);
+        tc::setForeColor((int)Color::Cyan);
+        if (b2b > 1)
+            std::cout << "Back to Back" << std::flush;
+        else 
+            std::cout << std::setw(12) << "" << std::flush;
     }
 }

@@ -18,7 +18,7 @@ tc: terminal control
 
 ## 4 - UI
 
-![Alt text](image.png)
+![Alt text](img/image.png)
 
 [Box Drawing Characters](https://en.wikipedia.org/wiki/Box-drawing_characters)
 
@@ -75,4 +75,24 @@ Update & Fix SRS
 2. Last successful movement of the tetromino was a rotate, as opposed to sideways movement, downward movement, or falling due to gravity.
 3. Three of the 4 squares diagonally adjacent to the T's center are occupied.
 
-## 16 -
+## 16 - Cross platform
+
+Support Linux & MaxOS
+
+Replace deprecated functions in C++20
+
+```cpp
+ramdom_shuffle -> shuffle
+rand -> std::mt19937
+```
+
+## 17 - B2B & Combo
+
+Fix T-spin check
+
+[T-spin Detailed Explanation](https://www.reddit.com/r/Tetris/comments/b01hfm/comment/eic43sq/)
+
+DT Cannon
+<center>
+    <img src="img/1.png" width="33%"><img src="img/2.png" width="33%"><img src="img/3.png" width="33%">
+</center>
