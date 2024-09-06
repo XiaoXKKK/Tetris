@@ -1,4 +1,5 @@
 #include "window.h"
+#include <iomanip>
 
 namespace ui {
     void show_windows()
@@ -77,9 +78,9 @@ namespace ui {
         std::string clear_str = count == 1 ? "Single" : count == 2 ? "Double" : count == 3 ? "Triple" : count == 4 ? "Tetris": "";
         tc::setCursor(16, 4);
         tc::setForeColor((int)Color::Orange);
-        std::cout << std::setw(10) << t_spin_str << std::flush;
+        std::cout << std::setw(12) << t_spin_str << std::flush;
         tc::setCursor(17, 4);
         tc::setForeColor((int)Color::Yellow);
-        std::cout << std::setw(10) << clear_str << std::flush;
+        std::cout << std::setw(12) << clear_str << std::flush;
     }
 }

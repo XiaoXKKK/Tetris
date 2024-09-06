@@ -24,10 +24,11 @@ namespace gm
     void keyEvent(){
         while (running)
         {
+            char tmp = tc::getch();
             if (locking) continue;
-            command = _getch();
-            if (commandMap.find(command) != commandMap.end())
+            if (commandMap.find(tmp) != commandMap.end())
             {
+                command = tmp;
                 if(helping && command != KEY_HELP && command != KEY_QUIT)
                 {
                     continue;

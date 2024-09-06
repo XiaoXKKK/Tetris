@@ -44,5 +44,17 @@ bool tc::kbhit()
 
 char tc::getch()
 {
-    return std::cin.get();
+#ifdef _WIN32
+    return _getch();
+#else 
+    char c;
+    struct termios oldt, newt;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    c = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    return c;
+#endif
 }

@@ -14,6 +14,8 @@ namespace gm {
     int level;
     int lines;
     int t_spin;
+    std::random_device rd;
+    std::mt19937 g(rd());
 
     void init() {
         running = true;
@@ -26,7 +28,6 @@ namespace gm {
         playfield = Matrix(22, std::vector<int>(10, 0));
         duration = 1000ms;
         frame = playfield;
-        srand(time(0));
         preview();
         one_piece = pick();
         hold_piece.clear();
@@ -54,7 +55,7 @@ namespace gm {
     {
         static std::vector<Tetromino> bag7 = { i, j, l, o, s, t, z };
         if (next_pieces.size() < PREVIEW) {
-            std::random_shuffle(bag7.begin(), bag7.end());
+            std::shuffle(bag7.begin(), bag7.end(), g);
             for (auto i : bag7) {
                 next_pieces.push(i);
             }

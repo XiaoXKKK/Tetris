@@ -1,6 +1,7 @@
 # VsCode
 .vscode/
 CmakePresets.json
+.cache/
 
 # Cmake
 build/
