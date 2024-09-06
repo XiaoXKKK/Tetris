@@ -93,6 +93,5 @@ Fix T-spin check
 [T-spin Detailed Explanation](https://www.reddit.com/r/Tetris/comments/b01hfm/comment/eic43sq/)
 
 DT Cannon
-<center>
-    <img src="img/1.png" width="33%"><img src="img/2.png" width="33%"><img src="img/3.png" width="33%">
-</center>
+
+<img src="img/1.png" width="33%"><img src="img/2.png" width="33%"><img src="img/3.png" width="33%">

@@ -7,30 +7,12 @@ set(CMAKE_CXX_STANDARD 20)
 # Project name
 project(Tetris)
 
+# include directories
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Add source files
-set(SOURCES 
-    main.cpp
-    terminal.cpp
-    terminal.h
-    utils.cpp 
-    utils.h
-    draw.cpp
-    draw.h
-    define.h
-    control.cpp
-    control.h
-    game.cpp
-    game.h
-    tetromino.cpp
-    tetromino.h
-    color.h
-    piece.cpp
-    piece.h
-    log.cpp
-    log.h
-    window.cpp
-    window.h
-)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/src SOURCES)
+
 
 # Add executable target
 add_executable(${PROJECT_NAME} ${SOURCES})
